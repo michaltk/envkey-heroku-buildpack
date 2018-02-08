@@ -23,6 +23,7 @@ if [ -f $ENV_DIR/ENVKEY ]; then
 
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
   OUTPUT=$(./envkey-source)
+  echo "envkey-source output:"
   echo $OUTPUT
 
   if [ "$OUTPUT" = "echo 'error:"* ]; then
