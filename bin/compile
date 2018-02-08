@@ -4,6 +4,17 @@ indent() {
   sed -u 's/^/       /'
 }
 
+contains() {
+  string="$1"
+  substring="$2"
+  if test "${string#*$substring}" != "$string"
+  then
+      return 0    # $substring is in $string
+  else
+      return 1    # $substring is not in $string
+  fi
+}
+
 echo "-----> Attempting to load, decrypt, and export EnvKey variables"
 
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
@@ -26,7 +37,7 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   echo "envkey-source output:"
   echo $OUTPUT
 
-  if [ "$OUTPUT" = "echo 'error:"* ]; then
+  if [ contains $OUTPUT "echo 'error:" ]; then
     MSG=$(eval $OUTPUT)
     echo "${$MSG}" | indent
     exit 1
