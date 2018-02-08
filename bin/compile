@@ -10,6 +10,8 @@ BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 ENV_DIR=${3:-}
 
 if [ -f $ENV_DIR/ENVKEY ]; then
+  echo "ENVKEY config var is set" | indent
+
   curl -s -o .ek_tmp_version https://raw.githubusercontent.com/envkey/envkey-source/master/version.txt
   ENVKEY_VERSION=$(cat .ek_tmp_version)
   rm .ek_tmp_version
@@ -19,9 +21,6 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   curl -s -o envkey-source.tar.gz "${ENVKEY_URL}"
   tar zxf envkey-source.tar.gz envkey-source
 
-  echo "$(ls)"
-
-  echo "ENVKEY config var is set" | indent
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
   echo $(./envkey-source) > $BP_DIR/export
   echo "EnvKey variables exported" | indent
