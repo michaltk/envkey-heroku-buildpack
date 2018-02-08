@@ -4,13 +4,15 @@ indent() {
   sed -u 's/^/       /'
 }
 
-echo "-----> Found a hello.txt"
+echo "-----> Attempting to load, decrypt, and export EnvKey variables"
 
-# if hello.txt is empty, abort the build
-if [ ! -s $1/hello.txt ]; then
-  echo "hello.txt was empty" | indent
-  exit 1
+BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+
+if [ -f $env_dir/ENVKEY ]; then
+  echo "ENVKEY config var is set" | indent
+  export "ENVKEY=$(cat $env_dir/ENVKEY)"
+  eval $($BP_DIR/ext/envkey-source_1.1.0_linux_amd64/envkey-source)
+  echo "ENVKEY variables exported" | indent
+else
+  echo "ENVKEY config var not set" | indent
 fi
-
-# replace hello with goodbye in a new file
-cat $1/hello.txt | sed -e "s/[Hh]ello/Goodbye/g" > $1/goodbye.txt
