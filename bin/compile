@@ -23,7 +23,7 @@ if [ -f $ENV_DIR/ENVKEY ]; then
 
   echo "ENVKEY config var is set" | indent
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
-  echo $(envkey-source) > $BP_DIR/export
+  echo $(./envkey-source) > $BP_DIR/export
   echo "EnvKey variables exported" | indent
 else
   echo "ENVKEY config var not set" | indent
