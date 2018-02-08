@@ -9,6 +9,12 @@ echo "-----> Attempting to load, decrypt, and export EnvKey variables"
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 ENV_DIR=$1
 
+echo "ENV_DIR:"
+echo $ENV_DIR
+
+echo "ENV_DIR contents:"
+echo $(ls $ENV_DIR)
+
 if [ -f $ENV_DIR/ENVKEY ]; then
   echo "ENVKEY config var is set" | indent
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
