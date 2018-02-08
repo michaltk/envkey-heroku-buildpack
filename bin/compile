@@ -24,7 +24,8 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
   OUTPUT=$(./envkey-source)
 
-  if [[ $OUTPUT == "echo 'error:"* ]]; then
+
+  if [[ "$OUTPUT" == "echo 'error:"* ]];then
     MSG=$(eval $OUTPUT)
     echo "${$MSG}" | indent
     exit 1
@@ -32,6 +33,7 @@ if [ -f $ENV_DIR/ENVKEY ]; then
     echo $OUTPUT > $BP_DIR/export
     echo "EnvKey variables exported" | indent
   fi
+
 else
   echo "ENVKEY config var not set" | indent
   exit 1
