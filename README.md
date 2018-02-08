@@ -12,6 +12,8 @@ Example usage:
 
     $ heroku buildpacks:add --index 1 https://github.com/envkey/envkey-heroku-buildpack
 
+    $ heroku config:set ENVKEY=...
+
     $ git push heroku master
     ...
     -----> EnvKey-enabled app detected
