@@ -7,7 +7,7 @@ indent() {
 echo "-----> Attempting to load, decrypt, and export EnvKey variables"
 
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
-ENV_DIR=$1
+ENV_DIR=${3:-}
 
 echo "ENV_DIR:"
 echo $ENV_DIR
