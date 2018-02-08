@@ -4,25 +4,12 @@ indent() {
   sed -u 's/^/       /'
 }
 
-contains() {
-  string="$1"
-  substring="$2"
-  if test "${string#*$substring}" != "$string"
-  then
-      return 0    # $substring is in $string
-  else
-      return 1    # $substring is not in $string
-  fi
-}
-
 echo "-----> Attempting to load, decrypt, and export EnvKey variables"
 
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 ENV_DIR=${3:-}
 
 if [ -f $ENV_DIR/ENVKEY ]; then
-  echo "ENVKEY config var is set" | indent
-
   curl -s -o .ek_tmp_version https://raw.githubusercontent.com/envkey/envkey-source/master/version.txt
   ENVKEY_VERSION=$(cat .ek_tmp_version)
   rm .ek_tmp_version
@@ -32,19 +19,10 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   curl -s -o envkey-source.tar.gz "${ENVKEY_URL}"
   tar zxf envkey-source.tar.gz envkey-source
 
+  echo "ENVKEY config var is set" | indent
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
-  OUTPUT=$(./envkey-source)
-  ERROR_STRING="echo 'error:"
-
-  if contains $OUTPUT $ERROR_STRING; then
-    MSG=$(eval $OUTPUT)
-    echo "${$MSG}" | indent
-    exit 1
-  else
-    echo $OUTPUT > $BP_DIR/export
-    echo "EnvKey variables exported" | indent
-  fi
-
+  echo $(./envkey-source) > $BP_DIR/export
+  echo "EnvKey variables exported" | indent
 else
   echo "ENVKEY config var not set" | indent
   exit 1
