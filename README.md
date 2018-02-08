@@ -15,4 +15,5 @@ Example usage:
     -----> EnvKey-enabled app detected
     -----> Attempting to load, decrypt, and export EnvKey variables
            ENVKEY config var is set
+           Downloading envkey-source 1.1.0 from https://raw.githubusercontent.com/envkey/envkey-source/master/dist/envkey-source_1.1.0_linux_amd64.tar.gz
            EnvKey variables exported
