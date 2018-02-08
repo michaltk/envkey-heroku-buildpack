@@ -7,12 +7,11 @@ indent() {
 echo "-----> Attempting to load, decrypt, and export EnvKey variables"
 
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+ENV_DIR=$1
 
-echo $(ls $env_dir)
-
-if [ -f $env_dir/ENVKEY ]; then
+if [ -f $ENV_DIR/ENVKEY ]; then
   echo "ENVKEY config var is set" | indent
-  export "ENVKEY=$(cat $env_dir/ENVKEY)"
+  export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
   eval $($BP_DIR/ext/envkey-source_1.1.0_linux_amd64/envkey-source)
   echo "ENVKEY variables exported" | indent
 else
