@@ -34,6 +34,7 @@ if [ -f $ENV_DIR/ENVKEY ]; then
 
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
   OUTPUT=$(./envkey-source)
+  ERROR_STRING="echo 'error:"
 
   if contains $OUTPUT $ERROR_STRING; then
     MSG=$(eval $OUTPUT)
