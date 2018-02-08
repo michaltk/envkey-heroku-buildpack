@@ -1,4 +1,4 @@
 #!/bin/sh
 
-echo "EnvKey Buildpack"
+echo "EnvKey-enabled"
 exit 0

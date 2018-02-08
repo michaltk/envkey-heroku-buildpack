@@ -12,14 +12,8 @@ ENV_DIR=${3:-}
 if [ -f $ENV_DIR/ENVKEY ]; then
   echo "ENVKEY config var is set" | indent
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
-
-  eval $($BP_DIR/ext/envkey-source_1.1.0_linux_amd64/envkey-source)
-  echo "ENVKEY variables exported" | indent
-  echo $DATABASE_URL
-
   echo $($BP_DIR/ext/envkey-source_1.1.0_linux_amd64/envkey-source) > $BP_DIR/export
-
-  echo $(cat $BP_DIR/export)
+  echo "EnvKey variables exported" | indent
 else
   echo "ENVKEY config var not set" | indent
 fi
