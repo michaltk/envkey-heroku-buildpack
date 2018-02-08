@@ -33,11 +33,12 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   tar zxf envkey-source.tar.gz envkey-source
 
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
+  ERROR_STRING="error:"
   OUTPUT=$(./envkey-source)
   echo "envkey-source output:"
-  echo $OUTPUT
 
-  if [ contains $OUTPUT "echo 'error:" ]; then
+  if test "${OUTPUT#*$ERROR_STRING}" != "$OUTPUT"
+  then
     MSG=$(eval $OUTPUT)
     echo "${$MSG}" | indent
     exit 1
