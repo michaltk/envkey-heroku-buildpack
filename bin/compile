@@ -19,6 +19,8 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   curl -s -o envkey-source.tar.gz "${ENVKEY_URL}"
   tar zxf envkey-source.tar.gz envkey-source
 
+  echo "$(ls)"
+
   echo "ENVKEY config var is set" | indent
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
   echo $(envkey-source) > $BP_DIR/export
