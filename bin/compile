@@ -8,6 +8,8 @@ echo "-----> Attempting to load, decrypt, and export EnvKey variables"
 
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
+echo $(ls $env_dir)
+
 if [ -f $env_dir/ENVKEY ]; then
   echo "ENVKEY config var is set" | indent
   export "ENVKEY=$(cat $env_dir/ENVKEY)"
