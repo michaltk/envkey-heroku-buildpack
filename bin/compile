@@ -12,6 +12,7 @@ ENV_DIR=$1
 if [ -f $ENV_DIR/ENVKEY ]; then
   echo "ENVKEY config var is set" | indent
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
+  short="${ENVKEY:0:3}" ; echo "ENVKEY=${short}..."
   eval $($BP_DIR/ext/envkey-source_1.1.0_linux_amd64/envkey-source)
   echo "ENVKEY variables exported" | indent
 else
