@@ -25,7 +25,8 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   OUTPUT=$(./envkey-source)
 
   if [[ $OUTPUT == "echo 'error:"* ]]; then
-    echo $(eval $OUTPUT) | indent
+    MSG=$(eval $OUTPUT)
+    echo "${$MSG}" | indent
     exit 1
   else
     echo $OUTPUT > $BP_DIR/export
