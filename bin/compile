@@ -7,6 +7,7 @@ indent() {
 echo "-----> Attempting to load, decrypt, and export EnvKey variables"
 
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+BUILD_DIR=${1:-}
 ENV_DIR=${3:-}
 
 if [ -f $ENV_DIR/ENVKEY ]; then
@@ -22,7 +23,9 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   echo "ENVKEY config var is set" | indent
   export "ENVKEY=$(cat $ENV_DIR/ENVKEY)"
   echo $(./envkey-source) > $BP_DIR/export
-  echo "EnvKey variables exported" | indent
+  echo "EnvKey variables exported to subsequent buildpacks" | indent
+  echo $(./envkey-source) > $BUILD_DIR/.profile.d/envkey.sh
+  echo "EnvKey variables exported to running application via .profile.d/envkey.sh" | indent
 else
   echo "ENVKEY config var not set" | indent
   exit 1
