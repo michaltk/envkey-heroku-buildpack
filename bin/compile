@@ -25,7 +25,7 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   echo $(./envkey-source) > $BP_DIR/export
   echo "EnvKey variables exported to subsequent buildpacks" | indent
   mkdir $BUILD_DIR/.profile.d
-  echo $(./envkey-source) > $BUILD_DIR/.profile.d/envkey.sh
+  cp $BP_DIR/export $BUILD_DIR/.profile.d/envkey.sh
   echo "EnvKey variables exported to running application via .profile.d/envkey.sh" | indent
 else
   echo "ENVKEY config var not set" | indent
