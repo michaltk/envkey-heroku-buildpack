@@ -26,10 +26,10 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   echo "EnvKey variables exported to subsequent buildpacks" | indent
   mkdir $BUILD_DIR/.profile.d
   cat > $BUILD_DIR/.profile.d/envkey.sh << EOF
-export -p > ./runtime-env.sh
+export -p > ./envkey-heroku-runtime-env.sh
 $(cat $BP_DIR/export)
-. ./runtime-env.sh
-rm runtime-env.sh
+. ./envkey-heroku-runtime-env.sh
+rm envkey-heroku-runtime-env.sh
 EOF
   echo "EnvKey variables exported to running application via .profile.d/envkey.sh" | indent
 else
