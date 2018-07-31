@@ -14,9 +14,9 @@ if [ -f $ENV_DIR/ENVKEY ]; then
   ENVKEY_VERSION=$(cat .ek_tmp_version)
   rm .ek_tmp_version
 
-  ENVKEY_URL="https://raw.githubusercontent.com/envkey/envkey-source/master/dist/envkey-source_${ENVKEY_VERSION}_linux_amd64.tar.gz"
+  ENVKEY_URL="https://github.com/envkey/envkey-source/releases/download/v${ENVKEY_VERSION}/envkey-source_${ENVKEY_VERSION}_linux_amd64.tar.gz"
   echo "Downloading envkey-source ${ENVKEY_VERSION} from ${ENVKEY_URL}" | indent
-  curl -s -o envkey-source.tar.gz "${ENVKEY_URL}"
+  curl -s -L -o envkey-source.tar.gz "${ENVKEY_URL}"
   tar zxf envkey-source.tar.gz envkey-source
 
   echo "ENVKEY config var is set" | indent
