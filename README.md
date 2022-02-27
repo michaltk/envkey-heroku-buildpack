@@ -1,23 +1,16 @@
-envkey-heroku-buildpack
-=======================
+# envkey-heroku-buildpack
 
-A buildpack for loading EnvKey variables before the main buildpack's compilation phase. Useful if you need some of you EnvKey config to be set during compilation--for example, when using NPM private modules, an NPM_TOKEN is required to install dependencies.
+A buildpack for supplying EnvKey variables to your Heroku apps, and making the `envkey-source` executable available to use in your `Procfile`. Also makes your EnvKey variables available to subsequent buildpacks.
 
-Requires that a valid ENVKEY is set as a heroku config var.
+Requires that a valid ENVKEY config var is set prior to running the buildpack.
 
-Usage
------
+## Example Usage
 
-Example usage:
+Example usage with Heroku:
 
-    $ heroku buildpacks:add --index 1 https://github.com/envkey/envkey-heroku-buildpack
+    $ heroku buildpacks:add --index 1 https://github.com/envkey/envkey/public/sdks/envkey-heroku-buildpack
+    $ heroku buildpacks:add --index 2 heroku/python
 
     $ heroku config:set ENVKEY=...
 
     $ git push heroku master
-    ...
-    -----> EnvKey-enabled app detected
-    -----> Attempting to load, decrypt, and export EnvKey variables
-           ENVKEY config var is set
-           Downloading envkey-source 1.1.7 from https://github.com/envkey/envkey-source/releases/download/v1.1.7/envkey-source_1.1.7_linux_amd64.tar.gz
-           EnvKey variables exported
